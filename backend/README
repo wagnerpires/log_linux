@@ -1,0 +1,11 @@
+@Repository
+public interface LogRepository extends JpaRepository<Log, Long> {
+
+    //@Query("SELECT obj.id, obj.valor, obj.data FROM Log obj WHERE obj.data BETWEEN :min AND :max ORDER BY obj.id ASC")
+    @Query("SELECT obj FROM Log obj WHERE obj.data BETWEEN :min AND :max ORDER BY obj.id ASC")
+    Page<Log> findByData(LocalDate min, LocalDate max, Pageable pageable);
+}
+
+
+
+// return page.map(x -> new LogDTO(x));
